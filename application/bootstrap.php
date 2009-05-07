@@ -37,19 +37,27 @@ if ( $uri[strlen($uri)-1] == '/' ) {
 	$page = '/' . $dir . '/' . $page ;
 } else {
 	switch (substr_count($uri, '/')) {
-		case 2:
-			list($dir,$page,$action) = explode('/',$uri);
-			$action = explode('-',$action);
-			$page = '/' . $dir . '/' . $page ;
+		case 2: 
+			list($_, $dir, $_page) = explode('/',$uri);
+			$actions = explode('-',$_page);
+			$_page = array_shift($actions);
+			$page = '/' . $dir . '/' . $_page ;
 			break;
 		case 1:
-			list($dir,$page) = explode('/',$uri);
-			$page = '/' . $dir . '/' . $page ;
+			list($dir,$_page) = explode('/',$uri);
+			$actions = explode('-',$_page);
+			$_page = array_shift($actions);
+			$page = '/' . $dir . '/' . $_page ;
 			break;
 		default:
 			$page = $uri;
 			break;
 	}
+}
+
+foreach ($actions as $action) {
+	list($key,$value) = explode(':',$action);
+	$_GET[$key] = $value;
 }
 
 if ($page != 'bootstrap' && file_exists(APPLICATION_PATH . '/' . $page . '.php')) {
