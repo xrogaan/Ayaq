@@ -1,0 +1,30 @@
+<?php
+if ($this->action == 'edit') {
+	if ($this->qid) {
+		?>
+		<form method="post" action="admin.php?edit=<?php echo $this->action ?>&amp;qid=<?php echo $this->qid ?>">
+			<input type="text" name="question" value="<?php echo $this->value_question ?>" /><br/>
+			<?php
+			foreach ($this->responses as $k => $v ) :
+			?>
+			<input type="text" name="response_<?php echo $v['id'] ?>" value="<?php echo $v['data'] ?>" />
+			<?php
+			endforeach;
+			?>
+		</form>
+		<?php
+	}
+}
+?>
+
+
+<dl>
+<?php
+foreach ($this->data as $qid => $qdata) {
+	echo '<dt>' . $this->questions[$qid] . "</dt>\n";
+	foreach ($qdata as $k => $rdata) {
+		echo '<dd>' . $rdata['reponse'] . "</dd>\n";
+	}
+}
+?>
+</dl>

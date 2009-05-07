@@ -1,0 +1,60 @@
+<?php echo "<?"; ?>xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Zombie Quizz : peux-tu survivre parmis les zombies ?</title>
+	<style>
+		a img { border: none; }
+		#container {
+			width: 800px;
+			margin-left:auto;
+			margin-right: auto;
+			padding: 1em;
+			border: 1px gray solid;
+		}
+		
+		table.response {
+			width: 1024px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		table.response td.response { border-right: 1px solid gray; }
+		table.response td.question { font-weight: bold; }
+		table.result {
+			width: 400px;
+			margin: 0;
+		}
+		.result_line { background-color: #FFDDCC; }
+		td.result_name {
+			width: 200px;
+		}
+		td.response {
+			width: 400px;
+			font-weight: bold;
+		}
+		table thead tr th {
+			border: 1px gray solid;
+		}
+		.id { background-color:#FFD6C2; text-align:center; padding: 0.2em;}
+		table.result tr {
+			border: 1px solid gray;
+			border-bottom:none;
+			padding:1;
+		}
+		table tr td {
+			vertical-align: top;
+		}
+		
+		#redirect_message_box {
+			width: 400px;
+			background-color: #FFCBCB;
+			border: 1px solid #800000;
+			padding: 1em;
+			margin: 1em;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+<?php echo showSessionMessages(); ?>

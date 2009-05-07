@@ -1,0 +1,13 @@
+<div id="container">
+
+<dl>
+
+<?php
+foreach ($this->results as $data) {
+echo '<dt><strong>'.htmlentities($data['name']).'</strong></dt>
+<dd>'.htmlentities($data['description']).'</dd>';
+}
+?>
+</dl>
+
+</div>

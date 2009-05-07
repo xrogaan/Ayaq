@@ -1,0 +1,46 @@
+<form action="admin.php?action=edit&amp;qid=<?php echo $this->qid ?>" method="post">
+
+<?php 
+echo $this->questions[$this->qid]."<br />";
+
+foreach ($this->response_data as $rid => $data) {
+	$cur_response = $this->data[$this->qid][$rid]['reponse'];
+	echo <<<EOF
+<table>
+<tr>
+<td class="response">$cur_response</td>
+<td>
+EOF;
+	foreach ($data as $vdata) {
+		extract($vdata,EXTR_OVERWRITE);
+		if (is_null($result_id)) {
+			foreach ($this->results_name as $result_id => $result_name) {
+				echo <<<EOF
+	<table>
+		<tr class="result_line">
+			<td class="result_name">$result_name</td><td class=""><input name="points[$rid][$result_id]" type="text" value="0" size="3" /></td>
+		</tr>
+	</table>
+EOF;
+			}
+		} else {
+			$result_name = $this->results_name[$result_id];
+			echo <<<EOF
+	<table>
+		<tr class="result_line">
+			<td class="result_name">$result_name</td><td><input name="points[$rid][$result_id]" type="text" value="$points" size="3" /></td>
+		</tr>
+	</table>
+EOF;
+		}
+	}
+	echo <<<EOF
+	</td>
+</tr>
+EOF;
+}
+
+?>
+</table>
+<input type="submit" name="submit" value="Enregistrer" />
+</form>

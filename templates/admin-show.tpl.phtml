@@ -1,0 +1,93 @@
+<?php
+if (QID) {?>
+<a href="admin.php?action=show">Retour a la liste</a>
+<?php if (QID>1) : ?>
+<a href="admin.php?action=show&amp;qid=<?php echo QID-1 ?>">Question précédente</a>
+<?php endif; ?>
+<a href="admin.php?action=show&amp;qid=<?php echo QID+1 ?>">Question suivante</a>
+<?php
+}
+?>
+
+<table class="response">
+<?php
+foreach ($this->data as $qid => $qdata) {
+	if (QID) {
+		if ($qid < QID) {
+			continue;
+		}
+		if ($qid > QID) {
+			break;
+		}
+	}
+	echo '<tr>
+	<td colspan="3" class="question"><a id="qid_'.$qid.'" href="admin.php?action=show&amp;qid='.$qid.'">' . $this->questions[$qid] .'</a>&nbsp;<a href="admin.php?action=edit&amp;qid='.$qid.'">'."<img src=\"public/images/pencil_go.png\" alt=\"edit\"/></td>
+</tr>\n";
+	foreach ($qdata as $rid => $rdata) {
+		echo "<tr>\n";
+		echo '<td><span class="id">' . $rid . "</td>\n";
+		echo '<td width="300" class="response">' . htmlentities($rdata['reponse']) . "</td>\n";
+		echo '<td>';
+		if (isset($this->response_points[$rid])) {
+?>
+<table class="result">
+<thead>
+	<tr>
+		<th>id</th>
+		<th>name</th>
+		<th>points</th>
+	</tr>
+</thead>
+<tbody>
+<?php
+		foreach ($this->response_points[$rid] as $value) {
+			if( !isset($points_summary[$value['result_id']]) ) {
+				$points_summary[$value['result_id']] = 0;
+			}
+			$points_summary[$value['result_id']] += $value['points'];
+			echo '<tr>';
+			echo '<td><span class="id">' . $value['result_id'] . '</span></td>';
+			echo '<td><span>' . htmlentities($value['result_name']) . '</span></td>';
+			echo '<td><span class="points">' . $value['points'] . '</span></td>';
+			echo '</tr>';
+		}
+?>
+</tbody>
+</table>
+<?php
+		} else {
+			echo "No results avaiable for this response.";
+		}
+		echo "</td>";
+		echo "</tr>\n";
+	}
+	if (isset($points_summary)) {
+?>
+	<tr>
+		<td><span class="id">#</span></td>
+		<td>Summaries</td>
+		<td>
+<table class="result">
+<thead>
+	<tr>
+		<th>id</th>
+		<th>name</th>
+		<th>points</th>
+	</tr>
+</thead>
+<tbody>
+		<?php
+			foreach ($this->results_name as $_rid => $_rname) {
+				echo "<tr><td>#</td><td><span> $_rname </span></td><td>${points_summary[$_rid]}</td></tr>";
+			}
+			unset($points_summary);
+		?>
+</tbody>
+</table>
+		</td>
+	</tr>
+<?php
+	}
+}
+?>
+</table>
