@@ -26,7 +26,7 @@ foreach ($this->data as $qid => $qdata) {
 	foreach ($qdata as $rid => $rdata) {
 		echo "<tr>\n";
 		echo '<td><span class="id">' . $rid . "</td>\n";
-		echo '<td width="300" class="response">' . htmlentities($rdata['reponse']) . "</td>\n";
+		echo '<td width="300" class="response">' . self::escape($rdata['reponse']) . "</td>\n";
 		echo '<td>';
 		if (isset($this->response_points[$rid])) {
 ?>
@@ -47,7 +47,7 @@ foreach ($this->data as $qid => $qdata) {
 			$points_summary[$value['result_id']] += $value['points'];
 			echo '<tr>';
 			echo '<td><span class="id">' . $value['result_id'] . '</span></td>';
-			echo '<td><span>' . htmlentities($value['result_name']) . '</span></td>';
+			echo '<td><span>' . self::escape($value['result_name']) . '</span></td>';
 			echo '<td><span class="points">' . $value['points'] . '</span></td>';
 			echo '</tr>';
 		}

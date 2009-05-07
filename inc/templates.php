@@ -35,8 +35,12 @@ class templates {
     private $_escape = array('htmlentities');
 	private $_data = array();
 
-    public function __construct($template_path='./templates/',$options=array()) {
-        $this->_templatePath = $template_path;
+    public function __construct($template_path='',$options=array()) {
+		if (!empty($template_path)) {
+			$this->_templatePath = $template_path;
+		} else {
+			$this->_templatePath = TEMPLATE_PATH;
+		}
         $this->_options = array_merge($this->_options,$options);
     }
 
@@ -151,9 +155,9 @@ class templates {
     public function escape($var) {
         foreach($this->_escape as $fnct) {
             if (in_array($fnct, array('htmlentities','htmlspecialchars'))) {
-                $var = call_user_func($fnct, $var, ENT_COMPAT);
+                $var = call_user_func_array($fnct, array($var,ENT_COMPAT,'utf-8'));
             } else {
-                $var = call_user_func($fnc, $var);
+                $var = call_user_func($fnct, $var);
             }
         }
         return $var;
@@ -183,7 +187,7 @@ class templates {
 	}
 	
     public function __isset($key) {
-        $strpos = strpos($key,'_');
+        $strpos = mb_strpos($key,'_');
         if (!is_bool($strpos) && $strpos !== 0) {
             return isset($this->$key);
         }

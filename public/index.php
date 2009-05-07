@@ -14,10 +14,11 @@ set_include_path(
 
 require_once 'functions.php';
 require_once 'templates.php';
+require_once 'PDO_Timer.php';
 require_once '../config.php';
 
 try {
-    require APPLICATION_PATH . '../bootstrap.php';
+    require APPLICATION_PATH . '/bootstrap.php';
 } catch (Exception $exception) {
     echo '<html><body><center>'
        . 'An exception occured while bootstrapping the application.';

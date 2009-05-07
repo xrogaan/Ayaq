@@ -1,7 +1,5 @@
 <?php
 
-require_once 'prepend.inc.php';
-
 $tpl = new templates();
 
 $tpl->addFile('_begin','_header.tpl.phtml')
@@ -32,7 +30,7 @@ switch ($action) {
 	case 'edit':
 		
 		if (!$qid) {
-			redirect('admin.php');
+			redirect('/admin');
 		}
 		
 		$response_data = $pdo->fetchAllAsDict2('response_id', 'result_id',

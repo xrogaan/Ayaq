@@ -4,8 +4,8 @@
 
 <?php
 foreach ($this->results as $data) {
-echo '<dt><strong>'.htmlentities($data['name']).'</strong></dt>
-<dd>'.htmlentities($data['description']).'</dd>';
+echo '<dt><strong>'.self::escape($data['name']).'</strong></dt>
+<dd>'.self::escape($data['description']).'</dd>';
 }
 ?>
 </dl>

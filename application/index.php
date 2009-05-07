@@ -1,15 +1,5 @@
 <?php
 
-require_once 'prepend.inc.php';
-
-
-
-if (isset($_GET['destroy'])) {
-	session_destroy();
-	header('Location: index.php');
-	die;
-}
-
 $tpl = new templates();
 $tpl->addFile('_begin','_header.tpl.phtml')
 	->addFile('_end','_footer.tpl.phtml')

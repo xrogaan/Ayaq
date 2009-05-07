@@ -1,6 +1,6 @@
 <?php
 
-require_once 'inc/PDOStatement_Timer.php';
+require_once 'PDOStatement_Timer.php';
 
 class PDO_Timer {
 	protected $_queries_log = array();
@@ -41,7 +41,7 @@ class PDO_Timer {
 		$args = func_get_args();
 		
 		if (count($args) < 2) {
-			require_once 'inc/PDO_Timer/PDO_Timer_Exception.php';
+			require_once 'PDO_Timer/PDO_Timer_Exception.php';
 			throw new PDO_Timer_Exception('fetchAllGroupBy need more argument ('.count($args).')');
 			die;
 		}
@@ -68,7 +68,7 @@ class PDO_Timer {
 		$args = func_get_args();
 		
 		if (count($args) < 2) {
-			require_once 'inc/PDO_Timer/PDO_Timer_Exception.php';
+			require_once 'PDO_Timer/PDO_Timer_Exception.php';
 			throw new PDO_Timer_Exception('fetchAllAsDict need more argument ('.count($args).')');
 			die;
 		}
@@ -95,7 +95,7 @@ class PDO_Timer {
 		$args = func_get_args();
 		
 		if (count($args) < 3) {
-			require_once 'inc/PDO_Timer/PDO_Timer_Exception.php';
+			require_once 'PDO_Timer/PDO_Timer_Exception.php';
 			throw new PDO_Timer_Exception('fetchAllAsDict need more argument ('.count($args).')');
 			die;
 		}
@@ -153,7 +153,7 @@ class PDO_Timer {
 	
 	public function update($table,array $data,$where) {
 		if (!is_string($where)) {
-			require_once 'inc/PDO_Timer/PDO_Timer_Exception.php';
+			require_once 'PDO_Timer/PDO_Timer_Exception.php';
 			throw new PDO_Timer_Exception('Argument 3 passed to ' . __CLASS__ . '::' . __FUNCTION__ . ' must be a string, ' . gettype($where) . ' given.');
 			die;
 		}
@@ -210,26 +210,8 @@ class PDO_Timer {
 	
 	public function __call($name,$args) {
 		$t = microtime(true);
-		try {
-			$r = call_user_func_array(array($this->_pdo,$name),$args);
-		} catch (PDOException $exception) {
-			echo '<html><body><center>'
-			   . 'An exception occured while queriing the database.';
-			if (defined('APPLICATION_ENVIRONMENT')
-				&& APPLICATION_ENVIRONMENT != 'production'
-			) {
-				echo '<br /><br />' . $exception->getMessage() . '<br />'
-				   . '<div align="left">Stack Trace:' 
-				   . '<pre>' . $exception->getTraceAsString() . '</pre></div>';
-				if ($exception instanceof PDOException) {
-					$trace = $exception->getTrace();
-					echo '<div align="left">Fail on:'
-					   . '<pre>' . $trace[0]['args'][0] . '</pre></div>';
-				}
-			}
-			echo '</center></body></html>';
-			exit(1);
-		}
+		$r = call_user_func_array(array($this->_pdo,$name),$args);
+
 		$this->_mark_query_time = microtime(true);
 		$this->_queries_log[] = array($this->_mark_query_time-$t, $name, $args);
 		
