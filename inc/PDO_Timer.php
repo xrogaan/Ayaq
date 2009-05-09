@@ -25,6 +25,22 @@ class PDO_Timer {
 		$this->_queries_log = array('PDOStatement' => array());
 	}
 
+	/**
+	 * Formate la requête avec les arguments fournis et quote les valeurs de manière intelligente.
+	 *
+	 * Les %s dans la requête sql sont remplacés par les arguments qui sont transformés en chaînes mysql.
+	 * self::_autoQuote( sql, arg1, arg2... )
+	 *
+	 * Exemple :
+	 * <code>
+	 * <?php
+	 * // give: UPDATE fuck SET a='1' WHERE b='popo'
+	 * echo self::_autoQuote( 'UPDATE hop SET a=%s WHERE b=%s', 1,'popo' );
+	 * ?>
+	 * </code>
+	 *
+	 * @return string
+	 */
 	private function _autoQuote() {
 		$args = func_get_args();
 		list($_, $sql) = each($args);
@@ -55,6 +71,20 @@ class PDO_Timer {
 		return vsprintf($sql, $params);
 	}
 
+	
+	/**
+	 * Formate la requête avec les arguments fournis.
+	 *
+	 * Effectue la requête, la met dans le log de bas de page avec son temps, renvoie la requête.
+	 * Les %s dans la requête sql sont remplacés par les arguments qui sont transformés en chaînes mysql.
+	 *
+	 * $obj->squery( sql, arg1, arg2... )
+	 * Exemple :
+	 * 	$obj->squery( 'UPDATE hop SET a=%s WHERE b=%s', 1,'popo' )
+	 * 	donne    UPDATE hop SET a='1' WHERE b='popo'
+	 *
+	 * @return PDOStatement_Timer
+	 */
 	public function squery () {
 		$args = func_get_args();
 		$sql = call_user_func_array(array('self','_autoQuote'), $args);
@@ -66,6 +96,8 @@ class PDO_Timer {
 	 * Exécute la requête et renvoie tous ses résultats dans un tableau de tableaux, groupés par la colonne $key
 	 *
 	 * exemple: $result[$row[$key]][] = $row;
+	 *
+	 * @return array
 	 */
 	public function fetchAllGroupBy() {
 		$args = func_get_args();
@@ -93,6 +125,7 @@ class PDO_Timer {
 	 *
      * exemple : $r = $obj->fetchAllAsDict( 'id', "SELECT * FROM users" )
      * $r[1] = user d'ID 1
+	 * @return array
 	 */
 	public function fetchAllAsDict() {
 		$args = func_get_args();
@@ -120,6 +153,7 @@ class PDO_Timer {
 	 *
      * exemple : $r = $obj->fetchAllAsDict( 'id', "SELECT * FROM users" )
      * $r[1] = user d'ID 1
+	 * @return array
 	 */
 	public function fetchAllAsDict2() {
 		$args = func_get_args();
@@ -151,6 +185,7 @@ class PDO_Timer {
 	 * exemple: $r = $obj->fetchPairs( 'SELECT id, name FROM table' )
 	 * $r[1] = le nom du truc dont l'ID est 1.
 	 *
+	 * @return array
 	 */
 	public function fetchPairs() {
 		$args = func_get_args();
@@ -166,6 +201,8 @@ class PDO_Timer {
 	
 	/**
 	 * Build & exec insert query
+	 *
+	 * @return PDOStatement_Timer
 	 */
 	public function insert($table, $data) {
 		$columns = array();
@@ -181,6 +218,9 @@ class PDO_Timer {
 		return self::squery($sql);
 	}
 	
+	/**
+	 *
+	 */
 	public function update($table,array $data,$where) {
 		if (!is_string($where)) {
 			require_once 'PDO_Timer/PDO_Timer_Exception.php';
@@ -199,7 +239,14 @@ class PDO_Timer {
 		}
 	}
 	
-	public function where($data,array $where=array()) {
+	/**
+	 * Construit un morceau de requête sql.
+	 *
+	 * @param array $data
+	 * @param array $where Optionnal
+	 * @return string|void
+	 */
+	public function where(array $data,array $where=array()) {
 		foreach ($data as $key => $value) {
 			$where[] = is_null($value) ? $key . ' IS NULL' : $key . '=' . self::_autoQuote($value);
 		}
@@ -212,16 +259,25 @@ class PDO_Timer {
 		
 	}
 	
+	/**
+	 *
+	 */
 	public function sprepare($sql) {
 		$this->_p_sql = $sql;
 		return $this;
 	}
 	
+	/**
+	 *
+	 */
 	public function sexecute() {
 		$args = func_get_args();
 		return call_user_func_array(array('self','squery'),array_merge(array($this->_p_sql),$args));
 	}
 	
+	/**
+	 *
+	 */
 	protected function _markQueriesLog($pdostatement=false) {
 		if ($pdostatement) {
 			$this->_queries_log['PDOStatement'][count($this->_queries_log['PDOStatement'])-1][0] += microtime(true)-$this->_mark_query_time;
@@ -230,14 +286,26 @@ class PDO_Timer {
 		}
 	}
 	
+	/**
+	 *
+	 */
 	public function setStatementQueriesLog($logs) {
 		//$this->_queries_log['PDOStatement'][] = $logs;
 	}
 	
+	/**
+	 * Used to return the logs
+	 *
+	 * @return array
+	 */
 	public function getQueriesLog() {
 		return $this->_queries_log;
 	}
 	
+	/**
+	 *
+	 * @return PDO|PDOStatement
+	 */
 	public function __call($name,$args) {
 		$t = microtime(true);
 		$r = call_user_func_array(array($this->_pdo,$name),$args);

@@ -194,7 +194,7 @@ class Url {
 	public function buildUri($page, $arguments=false, $category=false) {
 		if ($arguments !== false) {
 			if (!is_array($arguments)) {
-				throw new Url_Exception ('arguments must be an array. '.gettype($arguments).' given.');
+				throw new Url_Exception ('Argument 2 passed to ' . __CLASS__ . '::' . __FUNCTION__ . ' must be a string, ' . gettype($arguments) . ' given.');
 			}
 			
 			$params = array();

@@ -22,8 +22,14 @@ class PDOStatement_Timer {
 		$this->objParent = $parent;
 	}
 	
+	/**
+	 * Used to return the logs
+	 *
+	 * @return array
+	 */
 	public function getQueriesLog() {
-		return $this->_queries_log;
+		throw new PDO_Exception('PDOStatement_Timer::getQueriesLog is not implemented yet.');
+		//return $this->_queries_log;
 	}
 	
 	public function __call($name, $args) {
