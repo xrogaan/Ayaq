@@ -22,6 +22,6 @@ $pdo->exec("SET character_set_results='utf8'");
 
 require_once('Url.php');
 $url = new Url(SITEURL,BASEURI);
-
+$tpl = new templates();
 
 require ( $url->getPagePath() . '.php' );

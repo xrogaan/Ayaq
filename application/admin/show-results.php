@@ -1,5 +1,4 @@
 <?php
-$tpl = new templates();
 
 $tpl->addFile('_begin','_header.tpl.phtml')
 	->addFile('_end','_footer.tpl.phtml')
