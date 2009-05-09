@@ -1,7 +1,19 @@
 <?php
+/**
+* @category Ayaq
+* @package Ayaq_Url
+* @copyright Copyright (c) 2008, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 
 class Url_Exception extends Exception {}
 
+/**
+* @category Ayaq
+* @package Ayaq_Url
+* @copyright Copyright (c) 2008, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 class Url {
 	
 	protected $_baseUri = '/';

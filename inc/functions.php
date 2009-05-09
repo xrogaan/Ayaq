@@ -1,4 +1,10 @@
 <?php
+/**
+* @category Ayaq
+* @package Ayaq_Functions
+* @copyright Copyright (c) 2008, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 
 /**
  * Provide nice formatting for print_r

@@ -1,7 +1,7 @@
 <?php
 /**
-* @category News
-* @package News_Templates
+* @category Ayaq
+* @package Templates
 * @copyright Copyright (c) 2008, Bellière Ludovic
 * @license http://opensource.org/licenses/mit-license.php MIT license
 */
@@ -10,8 +10,8 @@ class templates_exception extends Exception {}
 
 /**
 * @author Bellière Ludovic
-* @category News
-* @package News_Templates
+* @category Ayaq
+* @package Ayaq_Templates
 * @copyright Copyright (c) 2008, Bellière Ludovic
 * @license http://opensource.org/licenses/mit-license.php MIT license
 */

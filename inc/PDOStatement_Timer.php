@@ -1,6 +1,17 @@
 <?php
+/**
+* @category Ayaq
+* @package Ayaq_PDOStatement_Timer
+* @copyright Copyright (c) 2008, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 
-
+/**
+* @category Ayaq
+* @package Ayaq_PDOStatement_Timer
+* @copyright Copyright (c) 2008, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 class PDOStatement_Timer {
 	protected $_queries_log;
 	protected $_mark_query_time;
