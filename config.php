@@ -1,7 +1,7 @@
 <?php
 
 define('SITEURL', 'http://bouli.homeip.net/');
-define('BASEURI', '~xrogaan/quizz-zombie/');
+define('BASEURI', '/~xrogaan/quizz-zombie/');
 
 define('DATABASE', 'test');
 define('USERNAME', 'test');

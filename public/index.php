@@ -8,7 +8,7 @@ session_start();
 define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application/'));
 
 set_include_path(
-    APPLICATION_PATH . '/../inc' 
+    realpath(APPLICATION_PATH . '/../inc') 
     . PATH_SEPARATOR . get_include_path()
 );
 

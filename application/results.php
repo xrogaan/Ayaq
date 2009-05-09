@@ -1,12 +1,10 @@
 <?php
 
-require_once 'prepend.inc.php';
-
 if (isset($_SESSION['quizz_responces'])) {
 	$r = $pdo->query('SELECT count(*) as num_question FROM quizz_questions');
 	$data = $r->fetchColumn();
 	if ($data['num_question'] < count($_SESSION['quizz_step'])) {
-		header('Location: index.php');
+		redirect('index');
 	}
 }
 
