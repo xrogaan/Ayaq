@@ -20,8 +20,26 @@ class PDO_Timer {
 		if (count($args) == 1) return $sql;
 		
 		$params = array();
-		while ( list( $_, $val ) = each($args) )
-			$params[] = $this->_pdo->quote($val);
+		while ( list( $_, $val ) = each($args) ) {
+			switch(gettype($val)) {
+				case 'integer':
+					$type = PDO::PARAM_INT;
+					break;
+				case 'double':
+					$type = PDO::PARAM_INT;
+					break;
+				case 'boolean':
+					$type = PDO::PARAM_BOOL;
+					break;
+				case NULL:
+					$type = PDO::PARAM_NULL;
+					break;
+				case 'string':
+				default:
+					$type = PDO::PARAM_STR;
+			}
+			$params[] = $this->_pdo->quote($val, $type);
+		}
 		return vsprintf($sql, $params);
 	}
 
