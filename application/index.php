@@ -47,15 +47,3 @@ if (isset($_SESSION['last_question']) && $_SESSION['last_question']===true) {
 	$tpl->questions = $data[0]['question'];
 	$tpl->render('index');
 }
-
-// Fichier de stockage des informations d'inclusion
-/*
-$fp = fopen('/tmp/wp.json', 'w');
-if ($fp) {
-    $clue = inclued_get_data();
-    if ($clue) {
-        fwrite($fp, serialize($clue));
-    }
-    fclose($fp);
-}
-*/
