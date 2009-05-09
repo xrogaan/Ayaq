@@ -151,7 +151,9 @@ class Url {
 	 * @return void
 	 */
 	public function redirect(array $page, $anchor=false) {
-		header('Location: '.$this->_baseUrl . '/' . call_user_func_array(array('$this','buildUri'),$page) . ($anchor ? "#$anchor" : '');
+		$toPage = call_user_func_array(array('self','buildUri'),$page);
+		$toPage.= $anchor ? "#$anchor" : '';
+		header('Location: '.$this->_baseUrl. $this->getBaseUri() . $toPage);
 		die;
 	}
 	
@@ -193,7 +195,7 @@ class Url {
 			$category = array($category);
 		}
 		
-		$category = implode('/',$category) . '/');
+		$category = implode('/',$category) . '/';
 			
 		if (!$this->pageExists($page,$category)) {
 			// do something -> page doesn't exists.
