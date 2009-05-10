@@ -13,7 +13,7 @@ set_include_path(
 );
 
 require_once 'functions.php';
-require_once 'templates.php';
+require_once 'Templates.php';
 require_once 'PDO_Timer.php';
 require_once '../config.php';
 

@@ -6,7 +6,7 @@
 * @license http://opensource.org/licenses/mit-license.php MIT license
 */
 
-class templates_exception extends Exception {}
+class Templates_Exception extends Exception {}
 
 /**
 * @author Bellière Ludovic
@@ -15,7 +15,7 @@ class templates_exception extends Exception {}
 * @copyright Copyright (c) 2008, Bellière Ludovic
 * @license http://opensource.org/licenses/mit-license.php MIT license
 */
-class templates {
+class Templates {
     /**
      * File list
      *
@@ -107,6 +107,8 @@ class templates {
      * Check if the template file is readable and returns its name
      *
      * @param string $tag
+	 * @return string
+	 * @throws templates_exception
      */
     private function _file($tag) {
         if (is_readable($this->_templatePath.$this->_files[$tag])) {
@@ -162,28 +164,27 @@ class templates {
         }
         return $var;
     }
-	
-	public function set($name, $data) {
-		$this->_data[$name] = $data;
-	}
     
 	public function __set($name,$data) {
-		self::set($name,$data);
+		if ('_' != substr($name, 0, 1)) {
+			$this->$name = $data;
+			return;
+		}
+		
+ 		throw new template('Setting private or protected class members is not allowed.',$this);
+	}
+	
+	public function __unset($name) {
+		if ('_' != substr($name, 0, 1) && isset($this->_data[$name])) {
+			unset($this->$name);
+		}
 	}
 	
 	public function __get($name) {
-//		return $this->_data[$name];
-		if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
-        }
-
-        $trace = debug_backtrace();
-        trigger_error(
-            'Propriété non-définie via __get(): <em>' . $name .
-            '</em> dans ' . $trace[0]['file'] .
-            ' à la ligne ' . $trace[0]['line'],
-            E_USER_NOTICE);
-        return null;
+		if ('_' != substr($name,0,1) && isset($this->$name)) {
+			return $this->$name;
+		}
+		throw new Templates_Exception('Getting private or protected class members is not allowed');
 	}
 	
     public function __isset($key) {
@@ -193,4 +194,21 @@ class templates {
         }
         return false;
     }
+	
+	/**
+	 * Access helper object from within a script
+	 * Based in large part on the example at
+	 * http://framework.zend.com/manual/en/zend.view.helpers.html
+	 *
+	 */
+	public function __call($name, $args) {
+		// is the helper already loaded?
+        $helper = $this->getHelper($name);
+
+        // call the helper method
+        return call_user_func_array(
+            array($helper, $name),
+            $args
+        );
+	}
 }

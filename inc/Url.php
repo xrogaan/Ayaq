@@ -22,11 +22,13 @@ class Url {
 	protected $_page;
 	protected $_category = false;
 	protected $_arguments = array();
+	
+	protected static $_instance;
 
 	/**
 	 * 
 	 */
-	function __construct($baseUrl=false, $baseUri=false) {
+	protected function __construct($baseUrl=false, $baseUri=false) {
 		if (!$baseUrl) {
 			if (isset($_SERVER['HTTP_HOST'])) {
 				$baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/';
@@ -47,6 +49,19 @@ class Url {
 		
 		self::_init();
 	}
+	
+	/**
+     * Singleton instance
+     *
+     * @return Url
+     */
+	public static function getInstance($baseUrl=false, $baseUri=false) {
+        if (null === self::$_instance) {
+            self::$_instance = new self($baseUrl, $baseUri);
+        }
+
+        return self::$_instance;
+    }
 	
 	public function init() {}
 	

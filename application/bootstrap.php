@@ -26,7 +26,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 $pdo->exec("SET character_set_results='utf8'");
 
 require_once('Url.php');
-$url = new Url(SITEURL,BASEURI);
-$tpl = new templates();
+$url = Url::getInstance(SITEURL,BASEURI);
+$tpl = new Templates();
 
 require ( $url->getPagePath() . '.php' );
