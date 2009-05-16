@@ -2,7 +2,7 @@
 if ($this->action == 'edit') {
 	if ($this->qid) {
 		?>
-		<form method="post" action="admin.php?edit=<?php echo $this->action ?>&amp;qid=<?php echo $this->qid ?>">
+		<form method="post" action="<?php echo Taplod_ObjectCache::get('URL')->buildUri('edit',array('action'=>$this->action,'qid'=>$this->qid),'admin') ?>">
 			<input type="text" name="question" value="<?php echo $this->value_question ?>" /><br/>
 			<?php
 			foreach ($this->responses as $k => $v ) :

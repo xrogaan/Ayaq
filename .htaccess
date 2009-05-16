@@ -1,7 +1,10 @@
 php_flag display_errors on
 
 RewriteEngine On
-RewriteBase /~xrogaan/quizz-zombie/
-RewriteCond %{REQUEST_FILENAME} !-f [OR]
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteBase /~xrogaan/quizz-zombie
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} /.* [OR]
+RewriteCond %{REQUEST_FILENAME} !-d 
 RewriteRule .* public/index.php [L]
+

@@ -1,4 +1,4 @@
-<form action="admin.php/edit-qid:<?php echo $this->qid ?>" method="post">
+<form action="<?php echo Taplod_ObjectCache::get('URL')->buildUri('edit',array('qid'=>$this->qid),'admin') ?>" method="post">
 
 <?php 
 echo $this->questions[$this->qid]."<br />";

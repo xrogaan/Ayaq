@@ -1,10 +1,13 @@
 <?php
+
+$url = Taplod_ObjectCache::get('URL');
+
 if (QID) {?>
-<a href="admin/show">Retour a la liste</a>
+<a href="<?php echo $url->buildUri('show',false,'admin') ?>">Retour a la liste</a>
 <?php if (QID>1) : ?>
-<a href="admin/show-qid:<?php echo QID-1 ?>">Question précédente</a>
+<a href="<?php echo $url->buildUri('show',array('qid'=> QID-1),'admin'); ?>">Question précédente</a>
 <?php endif; ?>
-<a href="admin/show-qid=<?php echo QID+1 ?>">Question suivante</a>
+<a href="<?php echo $url->buildUri('show',array('qid'=> QID+1),'admin') ?>">Question suivante</a>
 <?php
 }
 ?>
@@ -21,7 +24,7 @@ foreach ($this->data as $qid => $qdata) {
 		}
 	}
 	echo '<tr>
-	<td colspan="3" class="question"><a id="qid_'.$qid.'" href="admin/show-qid:'.$qid.'">' . $this->questions[$qid] .'</a>&nbsp;<a href="admin/edit-qid:'.$qid.'">'."<img src=\"".SITEURL.BASEURI."public/images/pencil_go.png\" alt=\"edit\"/></td>
+	<td colspan="3" class="question"><a id="qid_'.$qid.'" href="' . $url->buildUri('show',array('qid'=>$qid),'admin') . '">' . $this->questions[$qid] .'</a>&nbsp;<a href="' . $url->buildUri('edit',array('qid'=>$qid),'admin') . '">'."<img src=\"".$url->getBaseUri()."public/images/pencil_go.png\" alt=\"edit\"/></td>
 </tr>\n";
 	foreach ($qdata as $rid => $rdata) {
 		echo "<tr>\n";

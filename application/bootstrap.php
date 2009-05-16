@@ -21,12 +21,22 @@ if (!isset($_SESSION['quizz_step'])) {
 
 mb_internal_encoding("UTF-8");
 
-$pdo = new PDO_Timer('mysql:dbname=test;host=localhost','test','test');
-$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-$pdo->exec("SET character_set_results='utf8'");
+$db = Taplod_Db::factory('Pdo_Mysql',array(
+	'dbname'=>'test',
+	'host'=>'localhost',
+	'username'=>'test',
+	'password'=>'test'
+));
+$db->exec("SET character_set_results='utf8'");
 
-require_once('Url.php');
-$url = Url::getInstance(SITEURL,BASEURI);
-$tpl = new Templates();
+require_once('Taplod/Url.php');
+$url = Taplod_Url::getInstance(array(
+	'application_path' => APPLICATION_PATH,
+	'baseUrl'          => SITEURL,
+	'baseUri'          => BASEURI
+));
+Taplod_ObjectCache::set('URL',$url);
+
+$tpl = new Taplod_Templates();
 
 require ( $url->getPagePath() . '.php' );
