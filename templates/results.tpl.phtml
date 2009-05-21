@@ -1,11 +1,28 @@
 <div id="container">
+
+<?php
+
+if (isset($this->message)) {
+	echo '<p>' . $this->message . '<br/><a href="'.Taplod_ObjectCache::get('URL')->buildUri('index').'">Back to index</a></p>';
+} else {
+?>
 <p>Bravo ! Tu es <strong><?php echo $this->result['name'] ?></strong>.</p>
 <p><em><?php echo $this->result['description'] ?></em></p>
-<p>Cependant, tu possède aussi quelques caractéristique du <strong><?php echo $this->result2['name'] ?></strong>...</p>
+<p>Cependant, tu possède aussi quelques caractéristique <strong><?php echo $this->result2['name'] ?></strong>...</p>
 
+<?php
+if (!$this->stored_data):
+?>
 <form action="<?php echo Taplod_ObjectCache::get('URL')->buildUri('results_register'); ?>" method="post">
     Your pseudo : <input type="text" name="pseudo" id="pseudo" value="" />
     <input type="submit" name="register" value="Share" />
 </form>
-
+<?php
+else:
+?>
+<p><small>Vous visualisez les résultats de <em><a href="<?php echo Taplod_ObjectCache::get('URL')->buildUri('results',array('rid'=>$this->rid)) ?>"><?php echo $this->pseudo . ' (' . $this->rid . ')' ?></a></em></small></p>
+<?php
+endif;
+}
+?>
 </div>

@@ -60,6 +60,7 @@ function showSessionMessages() {
 
 function getQuizzResults($sort='values') {
 	if (isset($_SESSION['quizz_responces'])) {
+		$results = array();
 		foreach ($_SESSION['quizz_responces'] as $qid => $data) {
 			foreach ($data as $result_id => $points) {
 				if (!isset($results[$result_id])) {

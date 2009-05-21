@@ -6,12 +6,22 @@
 */
 
 if (isset($_POST['register'])) {
-	$pseudo = $_POST['pseudo'];
-	$data = session_encode();
-	$results = getQuizzResults('values');
-	$result_id1 = array_shift($results);
-	$db->insert('quizz_user_results',array('result'=>$result_id1,'data'=>$data));
-	$url->redirectError('results','Vos résultats ont bien été enregistré.');
+	$encoded_session = session_encode();
+	$results         = getQuizzResults('values');
+	$result_id       = array_shift($results);
+	
+	$data = array(
+		'result' => $result_id,
+		'data'   => $encoded_session
+	);
+	
+	if (!empty($_POST['pseudo'])) {
+		$data['pseudo'] = $_POST['pseudo'];
+	}
+	
+	$last_insert_id = $db->insert('quizz_user_results',$data);
+	
+	$url->redirectError(array('results',array('rid'=>$last_insert_id)),'Vos résultats ont bien été enregistré.');
 }
 
 $url->redirectError('results','Veuillez utiliser le formulaire approprié pour envoyer vos données.');
