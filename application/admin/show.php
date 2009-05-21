@@ -1,4 +1,5 @@
 <?php
+// list q&a
 
 $tpl->addFile('_begin','_header.tpl.phtml')
 	->addFile('_end','_footer.tpl.phtml')
@@ -41,4 +42,4 @@ $tpl->questions       = $questions;
 $tpl->response_points = $response_points;
 $tpl->results_name    = $results_name;
 
-$tpl->render('show');
+echo $tpl->render('show');

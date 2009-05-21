@@ -1,4 +1,9 @@
 <?php
+/**
+* @category Ayaq
+* @copyright Copyright (c) 2009, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 
 error_reporting(E_ALL);
 

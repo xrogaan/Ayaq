@@ -31,6 +31,7 @@ function addMessageInSession($message) {
 }
 
 function redirect($page) {
+	trigger_error('This function is deprecated. Use url->redirect instead.',E_USER_ERROR);
 	header('Location: '.SITEURL.BASEURI.$page);
 	die;
 }
@@ -40,16 +41,48 @@ function redirectError($page, $message) {
 	redirect($page.'#redirect_message_box');
 }
 
+function mapToHtmlentities($value) {
+	return htmlentities($value, ENT_COMPAT, 'utf-8');
+}
 
 function showSessionMessages() {
 	if (!empty($_SESSION['session_messages'])) {
 		$messages = '<div onclick="this.parentNode.removeChild(this);" id="redirect_message_box" name="redirect_message_box" class="redirect_message_box">'
 				  . '<div class=redirect_message id=redirect_message name=redirect_message>'
-				  . implode("<br/>", array_map('htmlentities', $_SESSION['session_messages']))
+				  . implode("<br/>", array_map('mapToHtmlentities', $_SESSION['session_messages']))
 				  . '</div></div>';
 		$_SESSION['session_messages'] = null;
 		return $messages;
 	} else {
 		return false;
+	}
+}
+
+function getQuizzResults($sort='values') {
+	if (isset($_SESSION['quizz_responces'])) {
+		foreach ($_SESSION['quizz_responces'] as $qid => $data) {
+			foreach ($data as $result_id => $points) {
+				if (!isset($results[$result_id])) {
+					$results[$result_id] = 0;
+				}
+				$results[$result_id] += $points;
+			}
+		}
+		
+		if ($sort) {
+			switch ($sort) {
+				case 'values':
+					$results = array_flip($results);
+					krsort($results);
+					break;
+				default:
+					break;
+			}
+		}
+		
+		return $results;
+	} else {
+		require_once 'Taplod/Exception.php';
+		throw new Taplod_Exception('there is no result to process');
 	}
 }

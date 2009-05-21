@@ -2,4 +2,10 @@
 <p>Bravo ! Tu es <strong><?php echo $this->result['name'] ?></strong>.</p>
 <p><em><?php echo $this->result['description'] ?></em></p>
 <p>Cependant, tu possède aussi quelques caractéristique du <strong><?php echo $this->result2['name'] ?></strong>...</p>
+
+<form action="<?php echo Taplod_ObjectCache::get('URL')->buildUri('results_register'); ?>" method="post">
+    Your pseudo : <input type="text" name="pseudo" id="pseudo" value="" />
+    <input type="submit" name="register" value="Share" />
+</form>
+
 </div>

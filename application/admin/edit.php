@@ -63,4 +63,4 @@ $tpl->questions     = $questions;
 $tpl->data          = $data;
 $tpl->qid = $qid;
 
-$tpl->render('edit');
+echo $tpl->render('edit');

@@ -1,4 +1,9 @@
 <?php
+/**
+* @category Ayaq
+* @copyright Copyright (c) 2009, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 
 $tpl->addFile('_begin','_header.tpl.phtml')
 	->addFile('_end','_footer.tpl.phtml')
@@ -33,7 +38,7 @@ if (!isset($_SESSION['last_question']) || !$_SESSION['last_question']) {
 }
 
 if (isset($_SESSION['last_question']) && $_SESSION['last_question']===true) {
-	redirect('results.php');
+	$url->redirect('results');
 } else {
 	$results = $db->query('SELECT qq.data AS question, qr.id AS rid, qr.qid, qr.data AS reponse
 	FROM quizz_questions AS qq
@@ -44,5 +49,5 @@ if (isset($_SESSION['last_question']) && $_SESSION['last_question']===true) {
 
 	$tpl->data      = $data;
 	$tpl->questions = $data[0]['question'];
-	$tpl->render('index');
+	echo $tpl->render('index');
 }
