@@ -7,7 +7,7 @@
 
 if (isset($_GET['rid'])) {
 	$rid = intval($_GET['rid']);
-	$query_result = $db->fetch('SELECT * FROM quizz_user_results WHERE id=%d',$rid);
+	$query_result = $db->fetch('SELECT * FROM quizz_user_results WHERE id=%s',$rid);
 	if ($query_result) {
 		$_SESSION['quizz_responces'] = array();
 		$tpl->pseudo  = $query_result['pseudo'];
@@ -29,6 +29,8 @@ if (isset($_SESSION['quizz_responces'])) {
 	if ($data['num_question'] < count($_SESSION['quizz_step'])) {die('huho');
 		$url->redirect('index');
 	}
+} else {
+	$url->redirect('index');
 }
 
 $tpl->addFile('_begin','_header.tpl.phtml')
@@ -51,3 +53,4 @@ $result2['name'] = ($result2['name'][1] == "'") ? 'de '.strtolower($result2['nam
 $tpl->result2 = $result2;
 $tpl->stored_data = (isset($rid)) ? true : false;
 echo $tpl->render('results');
+session_destroy();

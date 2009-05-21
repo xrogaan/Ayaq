@@ -1,4 +1,9 @@
 <?php
+/**
+* @category Ayaq
+* @copyright Copyright (c) 2008, Bellière Ludovic
+* @license http://opensource.org/licenses/mit-license.php MIT license
+*/
 
 $tpl->addFile('_begin','_header.tpl.phtml')
 	->addFile('_end','_footer.tpl.phtml')
@@ -20,7 +25,7 @@ foreach ($data as $tmp_qid => $value) {
 }
 
 if (!$qid) {
-	redirect('/admin');
+	$url->redirect('/admin');
 }
 
 $response_data = $db->fetchAllAsDict2('response_id', 'result_id',
@@ -53,7 +58,7 @@ if (isset($_POST['points'])) {
 			}
 		}
 	}
-	redirect('admin/show#qid_'.QID);
+	$url->redirect('admin/show#qid_'.QID);
 	
 }
 
