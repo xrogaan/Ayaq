@@ -1,9 +1,9 @@
 <?php
 /**
-* @category Ayaq
-* @copyright Copyright (c) 2009, Bellière Ludovic
-* @license http://opensource.org/licenses/mit-license.php MIT license
-*/
+ * @category Ayaq
+ * @copyright Copyright (c) 2009, Bellière Ludovic
+ * @license http://opensource.org/licenses/mit-license.php MIT license
+ */
 
 define('SITEURL', 'http://bouli.homeip.net');
 define('BASEURI', '/~xrogaan/quizz-zombie/');

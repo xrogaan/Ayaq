@@ -1,9 +1,9 @@
 <?php
 /**
-* @category Ayaq
-* @copyright Copyright (c) 2009, Bellière Ludovic
-* @license http://opensource.org/licenses/mit-license.php MIT license
-*/
+ * @category Ayaq
+ * @copyright Copyright (c) 2009, Bellière Ludovic
+ * @license http://opensource.org/licenses/mit-license.php MIT license
+ */
 
 defined('APPLICATION_PATH')
     or define('APPLICATION_PATH', dirname(__FILE__));

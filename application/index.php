@@ -1,9 +1,9 @@
 <?php
 /**
-* @category Ayaq
-* @copyright Copyright (c) 2009, Bellière Ludovic
-* @license http://opensource.org/licenses/mit-license.php MIT license
-*/
+ * @category Ayaq
+ * @copyright Copyright (c) 2009, Bellière Ludovic
+ * @license http://opensource.org/licenses/mit-license.php MIT license
+ */
 
 $tpl->addFile('_begin','_header.tpl.phtml')
 	->addFile('_end','_footer.tpl.phtml')
