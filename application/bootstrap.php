@@ -26,13 +26,15 @@ $db->exec("SET character_set_results='utf8'");
 
 require_once('Taplod/Url.php');
 $url = Taplod_Url::getInstance($config->url);
-/*array(
-	'application_path' => APPLICATION_PATH,
-	'baseUrl'          => SITEURL,
-	'baseUri'          => BASEURI
-));*/
 Taplod_ObjectCache::set('URL',$url);
 
 $tpl = new Taplod_Templates();
+
+if ($category = $url->getCategoryPath()) {
+    if (file_exists($category . 'bootstrap.php')) {
+        require $category . 'bootstrap.php';
+    }
+    unset ($category);
+}
 
 require ( $url->getPagePath() . '.php' );
