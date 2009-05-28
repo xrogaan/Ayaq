@@ -58,7 +58,7 @@ if (isset($_POST['points'])) {
 			}
 		}
 	}
-	$url->redirect('admin/show#qid_'.QID);
+	$url->redirect('admin/show','#qid_'.QID);
 	
 }
 

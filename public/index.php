@@ -19,9 +19,10 @@ set_include_path(
 
 require_once 'functions.php';
 require_once 'Taplod/Loader.php';
-require_once '../config.php';
 
 Taplod_Loader::registerAutoload();
+
+$config = new Taplod_Config(require '../config.php');
 
 try {
     require APPLICATION_PATH . '/bootstrap.php';
@@ -34,7 +35,7 @@ try {
         echo '<br /><br />' . $exception->getMessage() . '<br />'
            . '<div align="left">Stack Trace:' 
            . '<pre>' . $exception->getTraceAsString() . '</pre></div>';
-        if ($exception instanceof Taplod_Db_Adapter_Exception) {
+        if ($exception instanceof Taplod_Db_Exception) {
 			$trace = $exception->getTrace();
             echo '<div align="left">Query Trace:'
                . '<pre>' . $trace[0]['args'][0] . '</pre></div>';

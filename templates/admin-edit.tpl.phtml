@@ -1,4 +1,6 @@
-<form action="<?php echo Taplod_ObjectCache::get('URL')->buildUri('edit',array('qid'=>$this->qid),'admin') ?>" method="post">
+<div id="container">
+
+<form action="<?php echo $this->url('edit',array('qid'=>$this->qid),'admin') ?>" method="post">
 
 <?php 
 echo $this->questions[$this->qid]."<br />";
@@ -44,3 +46,5 @@ EOF;
 </table>
 <input type="submit" name="submit" value="Enregistrer" />
 </form>
+
+</div>

@@ -1,96 +1,106 @@
+<div id="container">
+
 <?php
 
-$url = Taplod_ObjectCache::get('URL');
-
-if (QID) {?>
-<a href="<?php echo $url->buildUri('show',false,'admin') ?>">Retour a la liste</a>
+if (QID) :
+?>
+<a href="<?php echo $this->url('show',false,'admin') ?>">Retour a la liste</a>
 <?php if (QID>1) : ?>
-<a href="<?php echo $url->buildUri('show',array('qid'=> QID-1),'admin'); ?>">Question précédente</a>
+<a href="<?php echo $this->url('show',array('qid'=> QID-1),'admin'); ?>">Question précédente</a>
 <?php endif; ?>
-<a href="<?php echo $url->buildUri('show',array('qid'=> QID+1),'admin') ?>">Question suivante</a>
+<a href="<?php echo $this->url('show',array('qid'=> QID+1),'admin') ?>">Question suivante</a>
 <?php
-}
+endif;
 ?>
 
 <table class="response">
 <?php
-foreach ($this->data as $qid => $qdata) {
-	if (QID) {
-		if ($qid < QID) {
-			continue;
-		}
-		if ($qid > QID) {
-			break;
-		}
-	}
-	echo '<tr>
-	<td colspan="3" class="question"><a id="qid_'.$qid.'" href="' . $url->buildUri('show',array('qid'=>$qid),'admin') . '">' . $this->questions[$qid] .'</a>&nbsp;<a href="' . $url->buildUri('edit',array('qid'=>$qid),'admin') . '">'."<img src=\"".$url->getBaseUri()."public/images/pencil_go.png\" alt=\"edit\"/></td>
-</tr>\n";
-	foreach ($qdata as $rid => $rdata) {
-		echo "<tr>\n";
-		echo '<td><span class="id">' . $rid . "</td>\n";
-		echo '<td width="300" class="response">' . self::escape($rdata['reponse']) . "</td>\n";
-		echo '<td>';
-		if (isset($this->response_points[$rid])) {
+foreach ($this->data as $qid => $qdata):
 ?>
-<table class="result">
-<thead>
-	<tr>
-		<th>id</th>
-		<th>name</th>
-		<th>points</th>
-	</tr>
-</thead>
-<tbody>
+  <tr>
+    <td colspan="3" class="question">
+      <a id="qid_<?php echo $qid ?>" href="<?php echo $this->url('show',array('qid'=>$qid),'admin') ?>"><?php echo $this->questions[$qid] ?></a>&nbsp;<a href="<?php echo $this->url('edit',array('qid'=>$qid),'admin') ?>"><img src="<?php echo $this->url('pencil_go.png',false,'public/images/') ?>" alt="edit"/>
+    </td>
+  </tr>
 <?php
-		foreach ($this->response_points[$rid] as $value) {
-			if( !isset($points_summary[$value['result_id']]) ) {
-				$points_summary[$value['result_id']] = 0;
-			}
-			$points_summary[$value['result_id']] += $value['points'];
-			echo '<tr>';
-			echo '<td><span class="id">' . $value['result_id'] . '</span></td>';
-			echo '<td><span>' . self::escape($value['result_name']) . '</span></td>';
-			echo '<td><span class="points">' . $value['points'] . '</span></td>';
-			echo '</tr>';
-		}
+    foreach ($qdata as $rid => $rdata) :
 ?>
-</tbody>
-</table>
+  <tr>
+    <td><span class="id"><?php echo $rid ?></td>
+    <td width="300" class="response"><?php echo self::escape($rdata['reponse']) ?></td>
+    <td>
 <?php
-		} else {
-			echo "No results avaiable for this response.";
-		}
-		echo "</td>";
-		echo "</tr>\n";
-	}
-	if (isset($points_summary)) {
+        if (isset($this->response_points[$rid])) :
 ?>
-	<tr>
-		<td><span class="id">#</span></td>
-		<td>Summaries</td>
-		<td>
-<table class="result">
-<thead>
-	<tr>
-		<th>id</th>
-		<th>name</th>
-		<th>points</th>
-	</tr>
-</thead>
-<tbody>
-		<?php
-			foreach ($this->results_name as $_rid => $_rname) {
-				echo "<tr><td>#</td><td><span> $_rname </span></td><td>${points_summary[$_rid]}</td></tr>";
-			}
-			unset($points_summary);
-		?>
-</tbody>
-</table>
-		</td>
-	</tr>
+      <table class="result">
+        <thead>
+          <tr>
+            <th>rid</th>
+            <th>name</th>
+            <th>points</th>
+          </tr>
+        </thead>
+        <tbody>
 <?php
-	}
-}
+        foreach ($this->response_points[$rid] as $value) :
+            if( !isset($points_summary[$value['result_id']]) ) {
+                $points_summary[$value['result_id']] = 0;
+            }
+            $points_summary[$value['result_id']] += $value['points'];
+?>
+          <tr>
+            <td><span class="id"><?php echo $value['result_id'] ?></span></td>
+            <td><span><?php echo self::escape($value['result_name']) ?></span></td>
+            <td><span class="points"><?php echo $value['points'] ?></span></td>
+          </tr>
+<?php
+        endforeach;
+?>
+        </tbody>
+      </table>
+<?php
+        else :
+            echo "No results avaiable for this response.";
+        endif;
+?>
+    </td>
+  </tr>
+<?php
+    endforeach;
+    if (isset($points_summary)) {
+?>
+  <tr>
+    <td><span class="id">#</span></td>
+    <td>Summaries</td>
+    <td>
+        <table class="result">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>points</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+            foreach ($this->results_name as $_rid => $_rname) :
+?>
+                <tr>
+                    <td>#</td>
+                    <td><span><?php echo $_rname ?></span></td>
+                    <td><?php echo $points_summary[$_rid]?></td>
+                </tr>
+<?php
+            endforeach;
+            unset($points_summary);
+        ?>
+            </tbody>
+        </table>
+    </td>
+  </tr>
+<?php
+    }
+endforeach;
 ?>
 </table>
+</div>
