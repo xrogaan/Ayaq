@@ -53,4 +53,3 @@ $result2['name'] = ($result2['name'][1] == "'") ? 'de '.strtolower($result2['nam
 $tpl->result2 = $result2;
 $tpl->stored_data = (isset($rid)) ? true : false;
 echo $tpl->render('results');
-session_destroy();

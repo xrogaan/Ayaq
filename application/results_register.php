@@ -20,7 +20,7 @@ if (isset($_POST['register'])) {
 	}
 	
 	$last_insert_id = $db->insert('quizz_user_results',$data);
-	
+	session_destroy();
 	$url->redirectError(array('results',array('rid'=>$last_insert_id)),'Vos résultats ont bien été enregistré.');
 }
 

@@ -23,6 +23,7 @@ require_once 'Taplod/Loader.php';
 Taplod_Loader::registerAutoload();
 
 $config = new Taplod_Config(require '../config.php');
+Taplod_ObjectCache::set('config', $config);
 
 try {
     require APPLICATION_PATH . '/bootstrap.php';
