@@ -29,8 +29,8 @@ if (isset($_POST['submit']) && isset($_POST['question_'.$key])) {
 }
 if (!isset($_SESSION['last_question']) || !$_SESSION['last_question']) {
 	$r = $db->query('SELECT count(*) as num_question FROM quizz_questions');
-	$data = $r->fetchColumn();
-	if ((int) $data == $_SESSION['quizz_step']) {
+	$num_question = $r->fetchColumn();
+	if ((int) $num_question == $_SESSION['quizz_step']) {
 		$_SESSION['last_question'] = true;
 	} else {
 		$_SESSION['last_question'] = false;
@@ -46,7 +46,9 @@ if (isset($_SESSION['last_question']) && $_SESSION['last_question']===true) {
 	WHERE qq.id='.$key);
 
 	$data = $results->fetchAll(PDO::FETCH_ASSOC);
-
+    
+    $tpl->progressCssWidth = $key / $num_question * 250;
+    
 	$tpl->data      = $data;
 	$tpl->questions = $data[0]['question'];
 	echo $tpl->render('index');
