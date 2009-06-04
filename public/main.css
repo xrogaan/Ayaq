@@ -45,7 +45,7 @@ table thead tr th {
 table.result tr {
 	border: 1px solid gray;
 	border-bottom:none;
-	padding:1;
+	padding: 1px;
 }
 table tr td {
 	vertical-align: top;

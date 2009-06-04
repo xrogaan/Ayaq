@@ -9,7 +9,7 @@ echo $this->questions;
 <?php
 $i=0;
 foreach ($this->data as $qdata) {
-		echo '<input type="radio" name="question_' . $qdata['qid'] . '" id="question_' . $i . '" value="' . $qdata['rid'] . '"> <label for="question_' . $i . '">' . self::escape($qdata['reponse']) . "</label><br/>\n";
+		echo '<input type="radio" name="question_' . $qdata['qid'] . '" id="question_' . $i . '" value="' . $qdata['rid'] . '"/> <label for="question_' . $i . '" >' . self::escape($qdata['reponse']) . "</label><br/>\n";
 		$i++;
 }
 ?>
