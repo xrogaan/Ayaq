@@ -1,51 +1,51 @@
 <?php
-echo $this->partialContent('header', 'admin', array('headbar'=>$this->headbar));
+echo $this->headContent;
 ?>
 
 <form action="<?php echo $this->url('edit',array('qid'=>$this->qid),'admin') ?>" method="post">
 
+<h1><?php echo $this->questions[$this->qid] ?></h1>
 <?php 
-echo $this->questions[$this->qid]."<br />";
-
 foreach ($this->response_data as $rid => $data) {
 	$cur_response = $this->data[$this->qid][$rid]['reponse'];
-	echo <<<EOF
-<table>
-<tr>
-<td class="response">$cur_response</td>
-<td>
-EOF;
+?>
+<div class="box">
+    <h1><?php echo $cur_response ?></h1>
+<?php
 	foreach ($data as $vdata) {
 		extract($vdata,EXTR_OVERWRITE);
 		if (is_null($result_id)) {
 			foreach ($this->results_name as $result_id => $result_name) {
+                $colorclass = ($result_id % 2) ? 'a' : 'b';
+                $qid = $this->qid;
 				echo <<<EOF
-	<table>
-		<tr class="result_line">
-			<td class="result_name">$result_name</td><td class=""><input name="points[$rid][$result_id]" type="text" value="0" size="3" /></td>
-		</tr>
-	</table>
+    <div id="response-$qid ?>" class="line c-$colorclass">
+        <span class="identifiant">#$result_id</span>
+        <span class="response">$result_name</span>
+        <a class="detail"><input name="points[$rid][$result_id]" type="text" value="0" size="3" /></a>
+    </div>
 EOF;
 			}
 		} else {
 			$result_name = $this->results_name[$result_id];
+            $colorclass = ($result_id % 2) ? 'a' : 'b';
+            $qid = $this->qid;
 			echo <<<EOF
-	<table>
-		<tr class="result_line">
-			<td class="result_name">$result_name</td><td><input name="points[$rid][$result_id]" type="text" value="$points" size="3" /></td>
-		</tr>
-	</table>
+    <div id="response-$qid ?>" class="line c-$colorclass">
+        <span class="identifiant">#$result_id</span>
+        <span class="response">$result_name</span>
+        <a class="detail"><input name="points[$rid][$result_id]" type="text" value="$points" size="3" /></a>
+    </div>
 EOF;
 		}
 	}
-	echo <<<EOF
-	</td>
-</tr>
-EOF;
-}
-
 ?>
-</table>
+</div>
+<?php
+}
+?>
+
+
 <input type="submit" name="submit" value="Enregistrer" />
 </form>
 

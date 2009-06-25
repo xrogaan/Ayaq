@@ -21,4 +21,4 @@ $headbar = array(
     ),
 );
 
-$tpl->headbar = $headbar;
+$tpl->headContent = $tpl->partialContent('header', 'admin', array('headbar'=>$headbar));
