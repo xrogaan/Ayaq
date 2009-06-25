@@ -1,0 +1,142 @@
+body {
+    font-size: 13.33px;
+}
+
+#mtop {
+    margin-top: 1em;
+    width: 100%;
+    height: 100px;
+}
+
+#mtop a {
+    text-decoration: none;
+}
+
+#headbar {
+    background: #f4f4f4;
+    text-align: left;
+    overflow: hidden;
+}
+
+#headbar ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#headbar li {
+    background: #f4f4f4;
+    position: relative;
+    float: left;
+    list-style: none;
+    padding-top: 0.3em;
+    height: 1.6em;
+    border-right: 1em solid white;
+}
+#headbar li.active {
+    background: #E5E5E5;
+}
+
+#headbar li:hover {
+    background: #E9E9E9
+}
+
+#headbar a {
+    padding: 1em 1em 0.4em;
+    color: gray;
+}
+#headbar a:hover {
+    color: black;
+}
+#headbar li.active a {
+    color: black;
+}
+#subbar {
+    margin: 0;
+    padding: 0;
+    background:#DADADA url(images/bg.png) repeat-x scroll 0 100%;
+    height: 2.0099em;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+    padding: 0.4em 1em 0;
+}
+#subbar ul {
+    margin: 0;
+    padding: 0;
+    list-style-image:none;
+    list-style-position:outside;
+    list-style-type:none;
+}
+#subbar li {
+    float: left;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+#subbar li a {
+    color: black;
+    margin-left: 2.5em;
+    padding: 0.25em;
+}
+#subbar li a.active {
+    background: white;
+}
+
+.c-a {
+    background: #F7F7F7;
+}
+.c-b {
+    background: #E3E8FF;
+}
+.results {
+    display: none;
+}
+
+div.box a img {
+    border: none;
+}
+
+div.box, .results {
+    background: white;
+    border: 1px solid gray;
+    overflow: hidden;
+    width: 63em;
+    margin-top: 2.5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.box h1 {
+    margin: 0;
+    font-size: 100%;
+    border-bottom: 1px solid gray;
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+div.box p {
+    padding: 0 0.4em 0 0.6em;
+}
+
+#qlist {
+    background: #DADDFF;
+    border: 1px solid #BBBDDA;
+    width: 63em;
+    margin-left: auto;
+    margin-right: auto;
+}
+.line {
+    padding: 0.25em;
+    clear: both;
+}
+.line .identifiant {
+    padding-right: 0.23em;
+    margin-right: 2em;
+    border-right: 1px solid #BBBDDA;
+    float: left;
+}
+.line .question {
+    float: left;
+}
+.line .detail {
+    float: right;
+}

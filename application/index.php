@@ -5,9 +5,7 @@
  * @license http://opensource.org/licenses/mit-license.php MIT license
  */
 
-$tpl->addFile('_begin','_header.tpl.phtml')
-	->addFile('_end','_footer.tpl.phtml')
-	->addFile('index','index.tpl.phtml');
+$tpl->addFile('index','index.tpl.phtml');
 
 // Response id = 1 -> n
 $key = $_SESSION['quizz_step']+1;

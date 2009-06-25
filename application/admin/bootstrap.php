@@ -8,3 +8,17 @@
 if (!isset($_COOKIE['admin']) || $_COOKIE['admin'] !== '1') {
     $url->redirectError('login',"You're not logged in.");
 }
+
+
+$headbar = array(
+    'dashboard' => array(
+        'url'         => array('category' => 'admin'),
+        'displayName' => 'Dashboard'
+    ),
+    'show' => array(
+        'url' => array('category' => 'admin'),
+        'displayName' => 'Q&A'
+    ),
+);
+
+$tpl->headbar = $headbar;

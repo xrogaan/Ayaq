@@ -1,3 +1,15 @@
-<div id="container">
-<a href="<?php echo $this->url('show',false,'admin') ?>">Lister les questions/réponses</a>
-</div>
+<?php
+echo $this->partialContent('header','admin',array('headbar'=>$this->headbar));
+?>
+
+    <div class="box">
+        <h1>Quelques statistiques</h1>
+        <p>
+        Vous possédez <?php echo $this->question_count ?> questions, <?php echo $this->response_count ?> réponses et <?php echo $this->results_count ?> résultats possibles.
+        </p>
+    </div>
+
+
+<?php
+echo $this->partialContent('footer','admin',false);
+?>

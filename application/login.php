@@ -9,9 +9,7 @@ if (isset($_COOKIE['admin']) && $_COOKIE['admin'] === '1') {
     $url->redirectError(array('index',false,'admin'),"You've been logged in.");
 }
 
-$tpl->addFile('_begin','_header.tpl.phtml')
-    ->addFile('_end','_footer.tpl.phtml')
-    ->addFile('login','login.tpl.phtml');
+$tpl->addFile('login','login.tpl.phtml');
 
 // temporary credential.
 $login    = "admin";

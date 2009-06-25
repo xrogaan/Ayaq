@@ -1,0 +1,21 @@
+<?php echo "<?"; ?>xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ayaq - administration</title>
+    <link rel="stylesheet" href="<?php echo Taplod_ObjectCache::get('URL')->getBaseUri() ?>public/admin.css" type="text/css" />
+</head>
+<body>
+<div id="content">
+    <div id="mtop">
+        <div id="headbar">
+            <?php echo $this->MakeMenu($this->headbar) ?>
+        </div>
+        <div id="subbar">
+            <div class="spacer"/>
+            <ul>
+                <li><a href="#" class="active">Index</a></li>
+                <li><a href="#">List</a></li>
+            </ul>
+        </div>
+    </div>

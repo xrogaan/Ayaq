@@ -1,4 +1,6 @@
-<div id="container">
+<?php
+echo $this->partialContent('header', 'admin', array('headbar'=>$this->headbar));
+?>
 
 <form action="<?php echo $this->url('edit',array('qid'=>$this->qid),'admin') ?>" method="post">
 
@@ -47,4 +49,7 @@ EOF;
 <input type="submit" name="submit" value="Enregistrer" />
 </form>
 
-</div>
+
+<?php
+echo $this->partialContent('footer','admin',false);
+?>

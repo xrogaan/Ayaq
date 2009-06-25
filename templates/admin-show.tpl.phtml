@@ -1,4 +1,6 @@
-<div id="container">
+<?php
+echo $this->partialContent('header','admin', array('headbar'=>$this->headbar));
+?>
 
 <?php
 
@@ -13,7 +15,31 @@ if (QID) :
 endif;
 ?>
 
-<table class="response">
+
+<?php
+foreach ($this->data as $qid => $qdata):
+?>
+<div class="box">
+    <h1><a id="qid_<?php echo $qid ?>" href="<?php echo $this->url('show',array('qid'=>$qid),'admin') ?>"><?php echo $this->questions[$qid] ?></a>&nbsp;<a href="<?php echo $this->url('edit',array('qid'=>$qid),'admin') ?>"><img src="<?php echo $this->url('pencil_go.png',false,'public/images/') ?>" alt="edit"/></a></h1>
+<?php
+    foreach ($qdata as $rid => $rdata) :
+?>
+    <div id="response-<?php echo $qid ?>" class="line c-<?php echo ($rid % 2) ? 'a' : 'b' ?>">
+        <span class="identifiant">#<?php echo $rid ?></span>
+        <span class="response"><?php echo self::escape($rdata['reponse']) ?></span>
+        <a class="detail">5 résultats associés</a>
+    </div>
+<?php
+    endforeach;
+?>
+</div>
+<?php
+endforeach;
+?>
+
+
+
+<!--table class="response">
 <?php
 foreach ($this->data as $qid => $qdata):
 ?>
@@ -102,5 +128,8 @@ foreach ($this->data as $qid => $qdata):
     }
 endforeach;
 ?>
-</table>
-</div>
+</table-->
+
+<?php
+echo $this->partialContent('footer','admin',false);
+?>

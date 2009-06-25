@@ -1,4 +1,8 @@
 <?php
+echo $this->partialContent('header','all',false);
+?>
+
+<?php
 if ($this->action == 'edit') {
 	if ($this->qid) {
 		?>
@@ -28,3 +32,6 @@ foreach ($this->data as $qid => $qdata) {
 }
 ?>
 </dl>
+<?php
+echo $this->partialContent('footer','all',false);
+?>

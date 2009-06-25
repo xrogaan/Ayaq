@@ -5,6 +5,8 @@
 * @license http://opensource.org/licenses/mit-license.php MIT license
 */
 
+$tpl->addFile('results','results.tpl.phtml');
+
 if (isset($_GET['rid'])) {
 	$rid = intval($_GET['rid']);
 	$query_result = $db->fetch('SELECT * FROM quizz_user_results WHERE id=%s',$rid);
@@ -14,9 +16,6 @@ if (isset($_GET['rid'])) {
 		$tpl->rid     = $rid;
 		session_decode($query_result['data']);
 	} else {
-		$tpl->addFile('_begin','_header.tpl.phtml')
-			->addFile('_end','_footer.tpl.phtml')
-			->addFile('results','results.tpl.phtml');
 		$tpl->message = "Sorry, but we can't found entry $rid.";
 		echo $tpl->render('results');
 		die;
@@ -32,11 +31,6 @@ if (isset($_SESSION['quizz_responces'])) {
 } else {
 	$url->redirect('index');
 }
-
-$tpl->addFile('_begin','_header.tpl.phtml')
-	->addFile('_end','_footer.tpl.phtml')
-	->addFile('results','results.tpl.phtml');
-
 
 $results = getQuizzResults('values');
 $result_id1 = array_shift($results);

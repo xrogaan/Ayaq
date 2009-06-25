@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript">
+function addInput() {
+    var ql = document.getElementById("questionList");
+    var i = parseFloat(ql.lastChild.id) + 1;
+    var newLine = document.createElement("br");
+    var inputdata = document.createElement("input");
+    inputdata.setAttribute("type","text");
+    inputdata.setAttribute("name","questions[]");
+    inputdata.setAttribute("id",i);
+    inputdata.setAttribute("size",70);
+    ql.appendChild(inputdata);
+    ql.appendChild(newLine);
+}
+</script>
+</head>
+<body><form id="newquestions" method="post" action="">Vos questions : <br />
+<div id="questionList">
+<input id="1" name="questions[]" type="text" size="70" value="" /><br/>
+</div>
+<input type="submit" value="Register" />
+</form>
+<a href="javascript:addInput();">Ajoutez un autre champ</a>
+</body>
+</html>

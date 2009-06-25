@@ -1,3 +1,7 @@
+<?php
+echo $this->partialContent('header','all',false);
+?>
+
 <div id="container">
 
 <dl>
@@ -11,3 +15,6 @@ echo '<dt><strong>'.self::escape($data['name']).'</strong></dt>
 </dl>
 
 </div>
+<?php
+echo $this->partialContent('footer','all',false);
+?>
