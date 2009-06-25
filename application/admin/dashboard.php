@@ -1,6 +1,6 @@
 <?php
 
-$tpl->addFile('dashboard','admin-dashboard.tpl.phtml');
+$tpl->addFile('dashboard','admin/dashboard.tpl.phtml');
 
 $stats = array (
     'question_count' => array_pop($db->fetch('SELECT count(*) as question_count FROM quizz_questions')),
