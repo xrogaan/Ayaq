@@ -5,7 +5,7 @@
  * @license http://opensource.org/licenses/mit-license.php MIT license
  */
 
-$tpl->addFile('edit','admin-edit.tpl.phtml');
+$tpl->addFile('edit','admin/edit.tpl.phtml');
 
 $qid = (empty($_GET['qid'])) ? false : (int) $_GET['qid'];
 define('QID', $qid);

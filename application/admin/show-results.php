@@ -1,6 +1,6 @@
 <?php
 
-$tpl->addFile('results','admin-results.tpl.phtml');
+$tpl->addFile('results','admin/results.tpl.phtml');
 
 $qid = (empty($_GET['qid'])) ? false : (int) $_GET['qid'];
 define('QID', $qid);

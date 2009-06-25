@@ -1,7 +1,7 @@
 <?php
 // list q&a
 
-$tpl->addFile('show','admin-show.tpl.phtml');
+$tpl->addFile('show','admin/show.tpl.phtml');
 
 $qid = (empty($_GET['qid'])) ? false : (int) $_GET['qid'];
 define('QID', $qid);
