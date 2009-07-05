@@ -1,14 +1,73 @@
-<?php
-echo $this->partialContent('header','all',false);
-?>
+<?php echo "<?"; ?>xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Zombie Quizz : peux-tu survivre parmis les zombies ?</title>
+	<!-- link rel="stylesheet" href="<?php echo Taplod_ObjectCache::get('URL')->getBaseUri() ?>public/main.css" type="text/css" / -->
+        <style type="text/css">
+            body {
+                background-color: #444444;
+                color: #AAFFAA;
+                font-size: 100%;
+            }
+            h1 {
+                font-size: 107%;
+            }
+            #container, #loginbox, #footer {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #loginbox, #footer {
+                width: 300px;
+            }
+            #container {
+                padding-top: 10%;
+                width: 500px;
+                text-align: center;
+            }
+            #loginbox {
+                width: 300px;
+                background-color: #333333;
+                padding: 4em;
+                text-align: left;
+                -moz-border-radius: 2em;
+                -moz-box-shadow: #4e4e4e 0px 0px 6px;
+            }
+            #footer {
+                margin-top: 2em;
+            }
+            #redirect_message_box {
+                width: 400px;
+                background-color: #FFCBCB;
+                border: 1px solid #FFABAB;
+                padding: 1em;
+                margin: 1em;
+                margin-left: auto;
+                margin-right: auto;
+                cursor: pointer;
+                -moz-border-radius: 1em;
+                -moz-box-shadow: #FFABAB 0px 0px 6px;
+                color: #000;
+        }
+        </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Ayaq : quiz maker</h1>
 
-<div id="container">
-<form action="<?php echo $this->url('login') ?>" method="post">
-Login : <input type="text" name="login" value="" /><br/>
-Password : <input type="password" name="password" value="" /><br/>
-<input type="submit" value="Get in !" />
-</form>
-</div>
-<?php
-echo $this->partialContent('footer','all',false);
-?>
+        <?php echo showSessionMessages(); ?>
+
+        <div id="loginbox">
+            <form action="<?php echo $this->url('login') ?>" method="post">
+                Login : <input type="text" name="login" value="" /><br/>
+                Password : <input type="password" name="password" value="" /><br/>
+                <input type="submit" value="Get in !" />
+            </form>
+        </div>
+
+        <div id="footer">
+        powered by <a href="http://xrogaan.github.com/Ayaq/">Ayaq</a> &copy; Bellière Ludovic 2009
+        </div>
+    </div>
+</body>
+</html>
