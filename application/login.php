@@ -5,22 +5,19 @@
  * @license http://opensource.org/licenses/mit-license.php MIT license
  */
 
-if (isset($_COOKIE['admin']) && $_COOKIE['admin'] === '1') {
+if (isset($_COOKIE['loggedin']) && $_COOKIE['loggedin'] === '1') {
     $url->redirectError(array('index',false,'admin'),"You've been logged in.");
 }
 
 $tpl->addFile('login','login.tpl.phtml');
 
-// temporary credential.
-$login    = "admin";
-$password = "c80bcc3141b691d946f3175937d6696874011be8"; // sha-1
-
-if (isset($_POST['login'])) {
-    if ($_POST['login'] == $login && sha1($_POST['password']) == $password) {
-        setcookie('admin',true,time()+60*60*24*30);
-        $url->redirectError(array('index',false,'admin'),"You've been logged in.");
+if (isset($_POST['login']) && !empty($_POST['login'])) {
+    $userExists = $db->fetchOne('SELECT count(*) as userExists FROM quizz_users WHERE email = %s AND password = SHA1(%s)',trim($_POST['login']),trim($_POST['password']));
+    if ($userExists == 1) {
+        setcookie('loggedin',true,time()+60*60*24*30);
+        $url->redirectError(array('index','false','admin'),'You have been logged in.');
     } else {
-        $url->redirectError('login','Your credential does not matches.');
+        $url->redirectError('login','You have failed, try again.');
     }
 }
 

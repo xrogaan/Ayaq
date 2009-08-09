@@ -1,4 +1,4 @@
-php_flag display_errors on
+#php_flag display_errors on
 
 RewriteEngine On
 RewriteBase /~xrogaan/quizz-zombie

@@ -1,0 +1,75 @@
+/* 
+    Document   : login
+    Created on : 09-août-2009, 1:14:07
+    Author     : xrogaan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body {
+    background-color: #444444;
+    color: #AAFFAA;
+    font-size: 100%;
+}
+h1 {
+    font-size: 107%;
+}
+
+a {
+    color: #5E975E;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: none;
+}
+
+#container, #loginbox, #footer {
+    margin-left: auto;
+    margin-right: auto;
+}
+#loginbox, #footer {
+    width: 300px;
+}
+#container {
+    padding-top: 10%;
+    width: 500px;
+    text-align: center;
+}
+#loginbox {
+    width: 300px;
+    background-color: #333333;
+    padding-left: 4em;
+    padding-right: 4em;
+    padding-top: 2em;
+    padding-bottom: 3.2em;
+    text-align: left;
+    -moz-border-radius: 2em;
+    -moz-box-shadow: #4e4e4e 0px 0px 6px;
+}
+#loginbox .notice {
+    margin: 1em auto 0em;
+    font-size: 70%;
+    padding: 0;
+    text-align: center;
+}
+#footer {
+    margin-top: 2em;
+}
+#redirect_message_box {
+    width: 400px;
+    background-color: #FFCBCB;
+    border: 1px solid #FFABAB;
+    padding: 1em;
+    margin: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    -moz-border-radius: 1em;
+    -moz-box-shadow: #FFABAB 0px 0px 6px;
+    color: #000;
+}

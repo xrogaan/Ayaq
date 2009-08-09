@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Zombie Quizz : peux-tu survivre parmis les zombies ?</title>
+	<title>Zombie Quizz : register</title>
 	<link rel="stylesheet" href="<?php echo Taplod_ObjectCache::get('URL')->getBaseUri() ?>public/login.css" type="text/css" />
 </head>
 <body>
@@ -12,12 +12,12 @@
         <?php echo showSessionMessages(); ?>
 
         <div id="loginbox">
-            <form action="<?php echo $this->url('login') ?>" method="post">
+            <form action="<?php echo $this->url('register') ?>" method="post">
                 <p><label for="login">Your e-mail address :</label><br/> <input id="login" type="text" name="login" value="" /></p>
                 <p><label for="password">Your password :</label><br/><input id="password" type="password" name="password" value="" /></p>
                 <input type="submit" value="Get in !" />
             </form>
-            <div class="notice"><a href="<?php echo $this->url('register') ?>">Don't have yet an account ?</a></div>
+            <div class="notice"><a href="<?php echo $this->url('login') ?>">Do you already have an account ?</a></div>
         </div>
 
         <div id="footer">
