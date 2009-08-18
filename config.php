@@ -15,5 +15,7 @@ return array (
         'dbname'   => 'test',
         'username' => 'test',
         'password' => 'test'
-    )
+    ),
+    'session_lifetime' => 60*60*24*30,
+    'email' => '',
 );

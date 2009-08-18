@@ -5,7 +5,11 @@
  * @license http://opensource.org/licenses/mit-license.php MIT license
  */
 
-if (!isset($_COOKIE['admin']) || $_COOKIE['admin'] !== '1') {
+$sessionData = isSessionLoaded();
+if (is_array($sessionData)) {
+    define('SESSION_SID',$sessionData['sid']);
+    $db->update('quizz_session', array('last_changes'=>mktime()), $db->where(array('sid'=>SESSION_SID)));
+} else {
     $url->redirectError('login',"You're not logged in.");
 }
 
