@@ -28,14 +28,14 @@ function xvdump( ) {
 
 function isSessionLoaded() {
     global $db, $config;
+
     if (isset($_COOKIE['qsid']) && isset($_COOKIE['loggedin'])) {
         $sessionData = $db->fetch('SELECT * FROM quizz_session WHERE sid=%s',sha1($_COOKIE['qsid']));
-        if ( sha1($sessionData['uid'] + $config->secret_key) == sha1($_COOKIE['loggedin']+$config->secret_key) ) {
+        if ( sha1($sessionData['uid'] + $config->secret_key) == $_COOKIE['loggedin'] ) {
             return $sessionData;
         }
-    } else {
-        return false;
     }
+    return false;
 }
 
 function redirect($page) {

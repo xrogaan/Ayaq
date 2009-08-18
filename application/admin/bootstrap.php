@@ -8,8 +8,10 @@
 $sessionData = isSessionLoaded();
 if (is_array($sessionData)) {
     define('SESSION_SID',$sessionData['sid']);
-    $db->update('quizz_session', array('last_changes'=>mktime()), $db->where(array('sid'=>SESSION_SID)));
+    $db->update('quizz_session', array('last_changes'=>mktime()), $db->where(array('sid'=>"'" . SESSION_SID . "'")));
 } else {
+    var_dump($sessionData);
+    die();
     $url->redirectError('login',"You're not logged in.");
 }
 

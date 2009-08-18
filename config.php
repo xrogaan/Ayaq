@@ -17,5 +17,6 @@ return array (
         'password' => 'test'
     ),
     'session_lifetime' => 60*60*24*30,
-    'email' => '',
+    'sender_email' => 'postmaster@localhost',
+    'bounce_email' => 'nospam@localhost'
 );

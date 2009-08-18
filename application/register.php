@@ -23,9 +23,13 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
         $email = trim($_POST['login']);
         $displayName = strstr($email,'@');
         $db->insert('quizz_users', array('email'=>$email,'password'=>sha1(trim($_POST['password'])),'username'=>$displayName));
-        $message = "here is your credentials :\login: $email\npassword: ".$_POST['password']."\n\nPlease login to ".$config->url->baseurl.$config->url->baseuri."login\n\n--\nBe aware : your password is fully encrypted and cannot be recovered.\nThe team.";
-        $headers = 'From: ';
-        mail($email,'Ayaq : your account',$message,'');
+        $message = "here is your credentials :\nlogin: $email\npassword: ".$_POST['password']."\n\nPlease login to ".$config->url->baseurl.$config->url->baseuri."login\n\n--\nBe aware : your password is fully encrypted and cannot be recovered.\nThe team.";
+        $headers = 'From: '.$config->sender_email."\r\n".
+            'Reply-To: '.$config->bounce_email."\r\n".
+            'X-Mailer: PHP/'.phpversion();
+        if (!mail($email,'Ayaq : your account',$message,$headers)) {
+            $url->addMessageInSession('WARNING: the email wasn\'t send.');
+        }
         $url->redirectError('login','Your account has been created. Please, log in !');
     }
 }
