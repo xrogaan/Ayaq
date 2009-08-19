@@ -66,6 +66,37 @@ function showSessionMessages() {
 	}
 }
 
+/**
+ * Check and valid an e-mail address
+ *
+ * @param string $email
+ * @return string
+ */
+function validateEmail ($email) {
+    defined('CHECK_MAIL_LEVEL') or
+        define('CHECK_MAIL_LEVEL', 1);
+
+    switch (CHECK_MAIL_LEVEL) {
+        case 1:
+            if (!preg_match( '/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`{|}~]+@([-0-9A-Z]+\.)+([0-9A-Z]){2,4}$/i',$email))
+                return false;
+            break;
+        case 2:
+            if (preg_match( '/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`{|}~]+@([-0-9A-Z]+\.)+([0-9A-Z]){2,4}$/i',$email)) {
+                $domain = substr(strstr($email, '@'), 1);
+                $mxs = null;
+                $x = getmxrr($domain, $mxs);
+                if ( !$x || empty($mxs) ) {
+                    return null;
+                }
+            } else {
+                return false;
+            }
+            break;
+    }
+    return true;
+}
+
 function getQuizzResults($sort='values') {
 	if (isset($_SESSION['quizz_responces'])) {
 		$results = array();
