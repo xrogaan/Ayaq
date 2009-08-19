@@ -21,6 +21,19 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
         $url->redirectError('register','This e-mail already exists in the database, please try another one or try to log in with it.');
     } else {
         $email = trim($_POST['login']);
+
+        if (strlen($_POST['password']) < 6) {
+            $url->addMessageInSession('Your password must be highter than 6 characters.');
+        }
+
+        if (!validateEmail($_POST['login'])) {
+            $url->addMessageInSession('Your e-mail is not a valid e-mail.');
+        }
+
+        if ($url->isMessageInSession()) {
+            $url->redirect('login','redirect_message_box');
+        }
+
         $displayName = strstr($email,'@');
         $db->insert('quizz_users', array('email'=>$email,'password'=>sha1(trim($_POST['password'])),'username'=>$displayName));
         $message = "here is your credentials :\nlogin: $email\npassword: ".$_POST['password']."\n\nPlease login to ".$config->url->baseurl.$config->url->baseuri."login\n\n--\nBe aware : your password is fully encrypted and cannot be recovered.\nThe team.";
