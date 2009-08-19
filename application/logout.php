@@ -5,5 +5,12 @@
  * @license http://opensource.org/licenses/mit-license.php MIT license
  */
 
-session_destroy();
+$sessionData = isSessionLoaded();
+if (is_array($sessionData)) {
+    $db->delete('quizz_session', $db->where(array('sid'=>$sessionData['sid'])));
+    setcookie('loggedin',null);
+    setcookie('qsid',null);
+    session_destroy();
+}
+
 $url->redirect('index');
