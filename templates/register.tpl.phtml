@@ -13,9 +13,9 @@
 
         <div id="loginbox">
             <form action="<?php echo $this->url('register') ?>" method="post">
-                <p><label for="login">Your e-mail address :</label><br/> <input id="login" type="text" name="login" value="" /></p>
-                <p><label for="password">Your password :</label><br/><input id="password" type="password" name="password" value="" size="20" /></p>
-                <input type="submit" value="Get in !" />
+                <label for="login" class="inlined">Your e-mail address :</label><input id="login" type="text" name="login" class="input-text" />
+                <label for="password" class="inlined">Your password :</label><input id="password" type="password" name="password" class="input-text" />
+                <input type="submit" value="Register !" />
             </form>
             <div class="notice"><a href="<?php echo $this->url('login') ?>">Do you already have an account ?</a></div>
         </div>
